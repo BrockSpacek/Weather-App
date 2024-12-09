@@ -1,0 +1,77 @@
+:root{
+    --day-color: linear-gradient(180deg, #F3D99F 0%, #E7A005 100%);
+    --night-color: linear-gradient(180deg, #686AC5 0%, #232447 100%);
+    --cloudy-color: linear-gradient(180deg, #808184 0%, #323234 100%);
+    --favorite-cloudy: #565659;
+    --favorite-night: #232447;
+    --favorite-day: #E7A005;
+    --day-card: #E1A011;
+    --night-card: #5557A4;
+    --cloudy-card: #7A7A7D;
+}
+
+body{
+    background-color: yellow
+}
+
+
+.search-bar{
+    width: 450px;
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 280px;
+}
+
+.input-search{
+    width: 350px;
+    height: 40px;
+    border: none;
+}
+
+.forecast-card-day{
+    width: 918px;
+    height: 591px;
+    background-color: var(--day-card);
+    margin-top: 180px;
+    margin-left: 411px;
+}
+
+.forecast-card-night{
+    width: 918px;
+    height: 591px;
+    background-color: var(--night-card);
+    margin-top: 180px;
+    margin-left: 411px;
+}
+
+.forecast-card-cloudy{
+    width: 918px;
+    height: 591px;
+    background-color: var(--cloudy-card);
+    margin-top: 180px;
+    margin-left: 411px;
+}
+
+.weather-margin{
+    margin-top: 70px;
+}
+
+.degrees-style{
+    font-size: 120px;
+    font-weight: 700;
+}
+.high-low-style{
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.five-day-card{
+    width: 673px;
+    height: 73px;
+    margin-top: 50px;
+    margin-left: 140px;
+}
+
+
