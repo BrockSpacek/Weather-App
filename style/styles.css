@@ -11,9 +11,10 @@
 }
 
 body{
-    background-color: yellow
+    background-color: var(--day-color);
 }
 
+/* Search Bar */
 
 .search-bar{
     width: 450px;
@@ -24,25 +25,22 @@ body{
     margin-left: 280px;
 }
 
-.input-search{
-    width: 350px;
-    height: 40px;
-    border: none;
-}
+/* Weather */
 
 .forecast-card-day{
     width: 918px;
     height: 591px;
     background-color: var(--day-card);
-    margin-top: 180px;
+    margin-top: -770px;
     margin-left: 411px;
+
 }
 
 .forecast-card-night{
     width: 918px;
     height: 591px;
     background-color: var(--night-card);
-    margin-top: 180px;
+    margin-top: -770px;
     margin-left: 411px;
 }
 
@@ -50,7 +48,7 @@ body{
     width: 918px;
     height: 591px;
     background-color: var(--cloudy-card);
-    margin-top: 180px;
+    margin-top: -770px;
     margin-left: 411px;
 }
 
@@ -72,6 +70,33 @@ body{
     height: 73px;
     margin-top: 50px;
     margin-left: 140px;
+}
+
+/* Favorites */ 
+
+.favorites-bg-day{
+    background-color: var(--favorite-day);
+    width: 300px;
+    height: 1024px;
+    margin-top: -60px;
+}
+
+.favorites-bg-night{
+    background-color: var(--favorite-night);
+    width: 300px;
+    height: 1024px;
+    margin-top: -60px;
+}
+
+.favorites-bg-cloudy{
+    background-color: var(--favorite-cloudy);
+    width: 300px;
+    height: 1024px;
+    margin-top: -60px;
+}
+
+.favorite-padding{
+    padding-top: 30px;
 }
 
 

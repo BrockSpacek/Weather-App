@@ -1,20 +1,40 @@
 import {APIKEY} from './environment.js'
 
 
+
+// IDs
+let currentDayTemp = document.getElementById('currentDayTemp');
+let highLowTemp = document.getElementById('highLowTemp');
+
+
+
+
+
+
+
+
+
+
+// Geo Location
+
 navigator.geolocation.getCurrentPosition(success);
 
 {
     coords: {
-        latitude: 37.7749;
-        longitutde: -122.4194;
+        latitude: 37.9577;
+        longitutde: -121.2908;
     }
 }
 
+
+// Functions 
+
+
 function success(position){
     console.log(position)
-    console.log("Our latitude is: " + position.coords.latitude);
-    console.log("Our longitude is: " + position.coords.longitude);
-    console.log("Now we know where you are!");
+    console.log("Latitude: " + position.coords.latitude);
+    console.log("Longitute: " + position.coords.longitude);
+
 }
 
 
@@ -22,7 +42,8 @@ function success(position){
 //    console.log(error.message);
 // }
 
-/* function apiCall(){
+
+ function apiCall(){
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=38.1341&lon=-121.2722&appid=${APIKEY}`)
     .then((response) => { 
         return response.json()
@@ -35,4 +56,3 @@ function success(position){
 
 apiCall();
 
-*/
