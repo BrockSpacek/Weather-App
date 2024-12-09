@@ -3,6 +3,7 @@ import {APIKEY} from './environment.js'
 
 
 // IDs
+let ApiButton = document.getElementById('ApiButton');
 let currentDayTemp = document.getElementById('currentDayTemp');
 let highLowTemp = document.getElementById('highLowTemp');
 
@@ -42,8 +43,12 @@ function success(position){
 //    console.log(error.message);
 // }
 
+ApiButton.addEventListener('click', function(event){
+    apiCallWeather();
+    apiCallFiveDay();
+});
 
- function apiCall(){
+ function apiCallWeather(){
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=38.1341&lon=-121.2722&appid=${APIKEY}`)
     .then((response) => { 
         return response.json()
@@ -54,5 +59,16 @@ function success(position){
     })
 }
 
-apiCall();
+
+function apiCallFiveDay(){
+    fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid=${APIKEY}`)
+    .then((response) => { 
+        return response.json()
+
+    })
+    .then((data) => {
+        console.log(data);
+    })
+}
+
 
