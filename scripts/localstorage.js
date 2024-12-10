@@ -11,7 +11,7 @@ function saveToLocalStorage(city){
 }
 
 function getFromLocalStorage(){
-    let localStorageData = localStorage.getItem('Names');
+    let localStorageData = localStorage.getItem('City');
 
     if(localStorageData == null){
         return [];

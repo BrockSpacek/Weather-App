@@ -1,4 +1,5 @@
-import {APIKEY} from './environment.js'
+import {APIKEY} from './environment.js';
+
 
 
 
@@ -15,6 +16,12 @@ let dayFourWeather = document.getElementById('dayFourWeather');
 let dayFiveWeather = document.getElementById('dayFiveWeather');
 let daySixWeather = document.getElementById('daySixWeather');
 let daySevenWeather = document.getElementById('daySevenWeather');
+let imageDayTwo = document.getElementById('imageDayTwo');
+let imageDayThree = document.getElementById('imageDayThree');
+let imageDayFour = document.getElementById('imageDayFour');
+let imageDayFive = document.getElementById('imageDayFive');
+let imageDaySix = document.getElementById('imageDaySix');
+let imageDaySeven = document.getElementById('imageDaySeven');
 
 
 
@@ -84,7 +91,7 @@ searchBarBtn.addEventListener('click', function(){
 
 
 
-// Workshop Functions
+// Workshop Functions that are not finished
 
 import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localStorage.js";
 
@@ -103,15 +110,15 @@ getFromStorageBtn.addEventListener('click', function(){
 });
 
 function createElements(){
-    let studentNames = getFromLocalStorage();
-    console.log(studentNames);
+    let cityNames = getFromLocalStorage();
+    console.log(cityNames);
 
-    studentNames.map(names => {
-        console.log(names)
+    studentNames.map(cities => {
+        console.log(cities)
 
         let p = document.createElement('p');
 
-        p.innerText = names;
+        p.innerText = cities;
 
         let removeButton = document.createElement('button');
         removeButton.type = 'button';
@@ -119,7 +126,7 @@ function createElements(){
         removeButton.innerText = "Delete Name";
 
         removeButton.addEventListener('click', function(){
-            removeFromLocalStorage(names);
+            removeFromLocalStorage(cities);
             p.remove();
         })
 

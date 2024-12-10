@@ -1,5 +1,4 @@
 :root{
-    --day-color: linear-gradient(180deg, #F3D99F 0%, #E7A005 100%);
     --night-color: linear-gradient(180deg, #686AC5 0%, #232447 100%);
     --cloudy-color: linear-gradient(180deg, #808184 0%, #323234 100%);
     --favorite-cloudy: #565659;
