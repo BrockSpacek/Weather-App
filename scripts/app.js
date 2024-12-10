@@ -4,6 +4,7 @@ import {APIKEY} from './environment.js';
 
 // Use Switch Statements on the current day and 5 day forecast to change the icons, temps.
 // If its cloudy, rainy, switch to the gray panel, if its night, switch too purple panel, and if its day switch to Yellow Panel
+// For High Low, use variable to compare lowest and highest values in the current day so that it will display. 
 
 
 // IDs

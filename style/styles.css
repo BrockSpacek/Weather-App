@@ -22,6 +22,7 @@ body{
     width: 450px;
     height: 40px;
     background-color: white;
+    border: none;
     border-radius: 20px;
     margin-top: 20px;
     margin-left: 280px;
@@ -79,6 +80,11 @@ body{
 .weather-icons{
     height: 30px;
     width: 30px;
+}
+
+::placeholder{
+    color: black;
+    font-weight: 600;
 }
 
 /* Favorites */ 
