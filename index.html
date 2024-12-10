@@ -22,7 +22,9 @@
                         <div>
 
                             <input class="search-bar" type="text" placeholder="Search"></input>
-                            <img src="./assets/search.png" alt="Search Bar Icon">
+                            <a href>
+                                <img src="./assets/search.png" alt="Search Bar Icon">
+                            </a>
 
                         </div>
                     </div>
@@ -45,16 +47,19 @@
 
             <div class="container forecast-card-day">
                 <div class="row">
-                    <div class="col-4 d-flex justify-content-center mt-4">
-                        <h2>+</h2>
-                        <h2>Add to Favorites </h2>
+                    <div class="col-4 text-center mt-4 d-flex justify-content-center">
+                        <h2 class="weather-text">+</h2>
+                        <div class="mt-3">
+                            <h2 class="add-to-favs-text">Add to</h2>
+                            <h2 class="add-to-favs-text">Favorites</h2>
+                        </div>
                     </div>
                     <div class="col-4 text-center mt-4">
-                        <h1>Weather</h1>
+                        <h1 class="weather-text">Weather</h1>
                     </div>
                     <div class="col-4 text-center mt-4">
-                        <h2 id="searchCity">City</h2>
-                        <div class="d-flex justify-content-center">
+                        <h2 id="searchCity" class="weather-text">City</h2>
+                        <div class="d-flex justify-content-center date-time-text">
                             <p id="searchDate">Date:</p>
                             <p id="searchTime">Time</p>
                         </div>
@@ -65,29 +70,29 @@
                     <h3 id="highLowTemp" class=" high-low-style mt-4">H: 50° L: 50°</h3>
                 </div>
                 <div class="row five-day-card">
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="dayTwoWeather">Sat</h5>
-                        <img id="imageDayTwo" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDayTwo" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 2">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="dayThreeWeather">Sun</h5>
-                        <img id="imageDayThree" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDayThree" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 3">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="dayFourWeather">Mon</h5>
-                        <img id="imageDayFour" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDayFour" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 4">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="dayFiveWeather">Tue</h5>
-                        <img id="imageDayFive" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDayFive" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 5">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="daySixWeather">Wed</h5>
-                        <img id="imageDaySix" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDaySix" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 6">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <h5 id="daySevenWeather">Thu</h5>
-                        <img id="imageDaySeven" src="./assets/Sun 02.png" alt="">
+                        <img id="imageDaySeven" class="weather-icons" src="./assets/Sun 02.png" alt="Weather Icon Day 7">
                     </div>
                 </div>
             </div>

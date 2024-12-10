@@ -27,6 +27,8 @@ body{
     margin-left: 280px;
 }
 
+
+
 /* Weather */
 
 .forecast-card-day{
@@ -71,7 +73,12 @@ body{
     width: 673px;
     height: 73px;
     margin-top: 50px;
-    margin-left: 140px;
+    margin-left: 100px;
+}
+
+.weather-icons{
+    height: 30px;
+    width: 30px;
 }
 
 /* Favorites */ 
@@ -99,6 +106,21 @@ body{
 
 .favorite-padding{
     padding-top: 30px;
+}
+
+.add-to-favs-text{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.weather-text{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.date-time-text{
+    font-size: 16px;
+    font-weight: 800;
 }
 
 
