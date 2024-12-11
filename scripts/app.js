@@ -14,18 +14,19 @@ let highLowTemp = document.getElementById('highLowTemp');
 let searchCity = document.getElementById('searchCity');
 let searchDate = document.getElementById('searchDate');
 let searchTime = document.getElementById('searchTime');
+
 let dayTwoWeather = document.getElementById('dayTwoWeather');
 let dayThreeWeather = document.getElementById('dayThreeWeather');
 let dayFourWeather = document.getElementById('dayFourWeather');
 let dayFiveWeather = document.getElementById('dayFiveWeather');
 let daySixWeather = document.getElementById('daySixWeather');
-let daySevenWeather = document.getElementById('daySevenWeather');
+
 let imageDayTwo = document.getElementById('imageDayTwo');
 let imageDayThree = document.getElementById('imageDayThree');
 let imageDayFour = document.getElementById('imageDayFour');
 let imageDayFive = document.getElementById('imageDayFive');
 let imageDaySix = document.getElementById('imageDaySix');
-let imageDaySeven = document.getElementById('imageDaySeven');
+
 
 
 
@@ -90,7 +91,7 @@ function apiCallFiveDay(){
 // HTML and Local Storage Functions 
 searchBarBtn.addEventListener('click', function(){
 
-
+    
 
 });
 
