@@ -8,6 +8,9 @@ import {APIKEY} from './environment.js';
 
 
 // IDs
+
+let previousMinutes = -1;
+
 let ApiButton = document.getElementById('ApiButton');
 let currentDayTemp = document.getElementById('currentDayTemp');
 let highLowTemp = document.getElementById('highLowTemp');
@@ -91,7 +94,7 @@ function apiCallFiveDay(){
 // HTML and Local Storage Functions 
 searchBarBtn.addEventListener('click', function(){
 
-    
+
 
 });
 
@@ -148,11 +151,29 @@ function updateClock() {
     const now = new Date();
     const year = now.getFullYear();
     let day = now.getDate();
+    let today = now.getDay();
     let month = now.toLocaleString("default", { month: "short" });
     let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, "0");
     const meridiem = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
+  
+    const week = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednsday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  
+    dayTwoWeather.innerText = week[(today + 1) % 6];
+    dayThreeWeather.innerText = week[(today + 2) % 6];
+    dayFourWeather.innerText = week[(today + 3) % 6];
+    dayFiveWeather.innerText = week[(today + 4) % 6];
+    daySixWeather.innerText = week[(today + 4) % 6];
+  
     const suffix = (day) => {
       if (day >= 11 && day <= 13) {
         return "th";
@@ -168,11 +189,13 @@ function updateClock() {
           return "th";
       }
     };
+  
     if (minutes !== previousMinutes) {
       searchDate.innerText = `${month} ${day}${suffix(day)}, ${year}`;
       searchTime.innerText = `${hours}:${minutes}${meridiem}`;
-      console.log(` ${month}/${day}/${year} ${hours}:${minutes}.`);
+  
       previousMinutes = minutes;
     }
   }
+
   setInterval(updateClock, 1000);
