@@ -1,10 +1,10 @@
 import {APIKEY} from './environment.js';
 
-// Notes that I want to add for next day
+// Notes that I want to add for tonight and Friday
 
-// Use Switch Statements on the current day and 5 day forecast to change the icons, temps.
-// If its cloudy, rainy, switch to the gray panel, if its night, switch too purple panel, and if its day switch to Yellow Panel
-// For High Low, use variable to compare lowest and highest values in the current day so that it will display. 
+// Make sure Data populates when page loads in for current location
+// Finish up Local Storoage
+// Finish up Day Time, Night Time, and Cloudy/Rainy Modes
 
 
 // IDs
