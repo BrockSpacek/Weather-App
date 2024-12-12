@@ -17,18 +17,21 @@ let highLowTemp = document.getElementById('highLowTemp');
 let searchCity = document.getElementById('searchCity');
 let searchDate = document.getElementById('searchDate');
 let searchTime = document.getElementById('searchTime');
+let weatherType = document.getElementById('weatherType');
+
+let searchInput = document.getElementById('searchInput');
 
 let dayTwoWeather = document.getElementById('dayTwoWeather');
 let dayThreeWeather = document.getElementById('dayThreeWeather');
 let dayFourWeather = document.getElementById('dayFourWeather');
 let dayFiveWeather = document.getElementById('dayFiveWeather');
-let daySixWeather = document.getElementById('daySixWeather');
+let dayOneWeather = document.getElementById('dayOneWeather');
 
 let imageDayTwo = document.getElementById('imageDayTwo');
 let imageDayThree = document.getElementById('imageDayThree');
 let imageDayFour = document.getElementById('imageDayFour');
 let imageDayFive = document.getElementById('imageDayFive');
-let imageDaySix = document.getElementById('imageDaySix');
+let imageDayOne = document.getElementById('imageDayOne');
 
 
 
@@ -37,119 +40,76 @@ let imageDaySix = document.getElementById('imageDaySix');
 
 // Geo Location
 
-navigator.geolocation.getCurrentPosition(success);
-
-{
-    coords: 
-    {
-        latitude: 37.9577;
-        longitutde: -121.2908;
-    }
-}
-function success(position){
-    console.log(position)
-    console.log("Latitude: " + position.coords.latitude);
-    console.log("Longitute: " + position.coords.longitude);
-
+async function geoLocation(location) {
+    const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${APIKEY}`);
+    const geoData = await promise.json();
+    return geoData
 }
 
 
-// function errorFunc(){
-//    console.log(error.message);
-// }
 
 // API 
+
+async function apiCallWeather(lat, lon){
+  const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}`)
+  const dataWeather = await promise.json();
+  return dataWeather;
+
+}
+
+async function apiCallFiveDay(lat, lon){
+  const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`)
+  const fiveDayWeatherData = await promise.json();
+  return fiveDayWeatherData;
+
+}
 
 ApiButton.addEventListener('click', function(event){
     apiCallWeather();
     apiCallFiveDay();
 });
 
- function apiCallWeather(){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=38.1341&lon=-121.2722&appid=${APIKEY}`)
-    .then((response) => { 
-        return response.json()
+ 
 
-    })
-    .then((data) => {
-        console.log(data);
-    })
+// Search (Collabed with Bowen)
+function searchFunction(fiveDayWeatherData, dataWeather){
+  console.log(fiveDayWeatherData, dataWeather);
+  const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9/5 + 32).toFixed(0);
+  let temp = kelvinToFahrenheit(dataWeather.main.temp);
+  currentDayTemp.innerText = `${temp}°F`;
+  let high = kelvinToFahrenheit(dataWeather.main.temp_max);
+  let low = kelvinToFahrenheit(dataWeather.main.temp_min);
+  highLowTemp.innerText = `H: ${high}°F L: ${low}°F`;
+  searchCity.innerText = `${dataWeather.name}`;
+  weatherType.innerText = `${dataWeather.weather[0].description}`
+  imageDayOne.src = `http://openweathermap.org/img/wn/${dataWeather.weather[0].icon}@2x.png`;
+  imageDayTwo.src = `http://openweathermap.org/img/wn/${fiveDayWeatherData.list[12].weather[0].icon}@2x.png`;
+  imageDayThree.src = `http://openweathermap.org/img/wn/${fiveDayWeatherData.list[20].weather[0].icon}@2x.png`;
+  imageDayFour.src = `http://openweathermap.org/img/wn/${fiveDayWeatherData.list[28].weather[0].icon}@2x.png`;
+  imageDayFive.src = `http://openweathermap.org/img/wn/${fiveDayWeatherData.list[36].weather[0].icon}@2x.png`;
+
 }
-
-
-function apiCallFiveDay(){
-    fetch(`api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid=${APIKEY}`)
-    .then((response) => { 
-        return response.json()
-
-    })
-    .then((data) => {
-        console.log(data);
-    })
-}
-
-
 
 
 // HTML and Local Storage Functions 
-searchBarBtn.addEventListener('click', function(){
+searchInput.addEventListener('keydown', async function(event){
 
-
-
-});
-
-
-
-
-// Workshop Functions that are not finished
-
-import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "../localStorage.js";
-
-const inputField = document.getElementById('storageInput');
-const addToStorageBtn = document.getElementById('addToStorageBtn');
-const getFromStorageBtn = document.getElementById('getFromStorageBtn');
-const storedValue = document.getElementById('storedValue');
-
-addToStorageBtn.addEventListener('click', function(){
-    let userInput = inputField.value;
-    saveToLocalStorage(userInput);
-});
-
-getFromStorageBtn.addEventListener('click', function(){
-    createElements();
-});
-
-function createElements(){
-    let cityNames = getFromLocalStorage();
-    console.log(cityNames);
-
-    studentNames.map(cities => {
-        console.log(cities)
-
-        let p = document.createElement('p');
-
-        p.innerText = cities;
-
-        let removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.className = "btn btn-danger";
-        removeButton.innerText = "X";
-
-        removeButton.addEventListener('click', function(){
-            removeFromLocalStorage(cities);
-            p.remove();
-        })
-
-        p.appendChild(removeButton);
-
-        storedValue.appendChild(p);
-    });
+if(event.key == 'Enter'){
+  let location = searchInput.value 
+  let geoData = await geoLocation(location);
+  let dataWeather = await apiCallWeather(geoData[0].lat, geoData[0].lon);
+  const fiveDayWeatherData = await apiCallFiveDay(geoData[0].lat, geoData[0].lon);
+  searchFunction(fiveDayWeatherData, dataWeather);
 }
 
-// Help from Tanush
+});
+
+
+
+
+// Date and Time ( Help from Tanush )
 function updateClock() {
     const now = new Date();
-    const year = now.getFullYear();
     let day = now.getDate();
     let today = now.getDay();
     let month = now.toLocaleString("default", { month: "short" });
@@ -159,39 +119,25 @@ function updateClock() {
     hours = hours % 12 || 12;
   
     const week = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
     ];
-  
+
+    dayOneWeather.innerText = week[(today) % 6];
     dayTwoWeather.innerText = week[(today + 1) % 6];
     dayThreeWeather.innerText = week[(today + 2) % 6];
     dayFourWeather.innerText = week[(today + 3) % 6];
     dayFiveWeather.innerText = week[(today + 4) % 6];
-    daySixWeather.innerText = week[(today + 4) % 6];
+    
   
-    const suffix = (day) => {
-      if (day >= 11 && day <= 13) {
-        return "th";
-      }
-      switch (day % 10) {
-        case 1:
-          return "st";
-        case 2:
-          return "nd";
-        case 3:
-          return "rd";
-        default:
-          return "th";
-      }
-    };
   
     if (minutes !== previousMinutes) {
-      searchDate.innerText = `${month} ${day}${suffix(day)}, ${year}`;
+      searchDate.innerText = `${month} ${day}${suffix(day)}, `;
       searchTime.innerText = `${hours}:${minutes}${meridiem}`;
   
       previousMinutes = minutes;
