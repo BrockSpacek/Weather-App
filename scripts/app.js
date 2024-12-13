@@ -12,7 +12,7 @@ import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from ".
 // IDs
 
 
-let ApiButton = document.getElementById('ApiButton');
+
 let currentDayTemp = document.getElementById('currentDayTemp');
 let highLowTemp = document.getElementById('highLowTemp');
 let searchCity = document.getElementById('searchCity');
@@ -83,10 +83,7 @@ async function apiCallFiveDay(lat, lon){
 
 }
 
-ApiButton.addEventListener('click', function(event){
-    apiCallWeather();
-    apiCallFiveDay();
-});
+
 
  
 
