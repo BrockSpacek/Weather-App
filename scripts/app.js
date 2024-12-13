@@ -11,7 +11,6 @@ import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from ".
 
 // IDs
 
-let previousMinutes = -1;
 
 let ApiButton = document.getElementById('ApiButton');
 let currentDayTemp = document.getElementById('currentDayTemp');
@@ -38,6 +37,7 @@ let imageDayOne = document.getElementById('imageDayOne');
 
 let lat = "";
 let lon = "";
+let previousMinutes = -1;
 
 let mainCardColor = document.getElementById('mainCardColor');
 let favoriteCardColor = document.getElementById('favoriteCardColor');
@@ -52,16 +52,15 @@ async function geoLocation(location) {
     return geoData
 }
 
-// When Start program/ Nav geo location will ateempt to grap location
 
 navigator.geolocation.getCurrentPosition(success);
 
-// If it gets location successfully, it runs function success which allows you to save your lat and lon values (These are global variables at the top of my page)
+
 async function success(position){
     console.log(position)
     lat = position.coords.latitude
     lon = position.coords.longitude
-    // after i save lat and lon, I need to call the api call weather passing in my lat and lon, and use the data from that call to populate my UI
+   
     let dataWeather = await apiCallWeather(lat, lon);
     const fiveDayWeatherData = await apiCallFiveDay(lat, lon);
     searchFunction(fiveDayWeatherData, dataWeather);
