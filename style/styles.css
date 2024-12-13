@@ -9,8 +9,17 @@
     --cloudy-card: #7A7A7D;
 }
 
-body{
-    background-image: linear-gradient(to bottom left, #F3D99F , #E7A005);
+  
+
+.bg-day{
+    background-image: linear-gradient(to bottom, #F3D99F , #E7A005);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.bg-night{
+    background-image: linear-gradient(to bottom,#686AC5, #232447);
     background-size: cover; 
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -82,6 +91,29 @@ body{
     width: 50px;
 }
 
+.white-text{
+    color: white;
+}
+
+.button-text-day{
+    background-color: var(--day-card);
+    border: none;
+    padding-bottom: 2rem;
+    
+}
+
+.button-text-night{
+    background-color: var(--night-card);
+    border: none;
+    padding-bottom: 2rem;
+}
+
+.button-text-cloudy{
+    background-color: var(--cloudy-card);
+    border: none;
+    padding-bottom: 2rem;
+}
+
 ::placeholder{
     color: black;
     font-weight: 600;
@@ -127,6 +159,25 @@ body{
 .date-time-text{
     font-size: 16px;
     font-weight: 800;
+}
+
+.removeBtn{
+    border: 1px;
+    background-color: none;
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.removeBtnNight{
+    border: 1px;
+    background-color: none;
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-top: 10px;
+    color: white;
 }
 
 

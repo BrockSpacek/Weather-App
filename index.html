@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./style/styles.css">
 </head>
 
-<body>
+<body class="bg-day">
 
     <!-- Search Bar -->
     <section>
@@ -41,15 +41,16 @@
 
         <!-- Favorite -->
         <div>
-            <div class="favorites-bg-day text-center">
+            <div id="favoriteCardColor" class="favorites-bg-day text-center">
                 <h1 class="favorite-padding"> Favorites </h1>
+                <p id="storedValue" class=""></p>
             </div>
 
-            <div class="container forecast-card-day">
+            <div id="mainCardColor" class="container forecast-card-day">
                 <div class="row">
                     <div class="col-4 text-center mt-4 d-flex justify-content-center">
-                        <h2 class="weather-text">+</h2>
-                        <div class="mt-3">
+                        <button id="addFavoriteBtn" class="weather-text button-text-day">+</button>
+                        <div class="mt-4">
                             <h2 class="add-to-favs-text">Add to</h2>
                             <h2 class="add-to-favs-text">Favorites</h2>
                         </div>

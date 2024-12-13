@@ -1,4 +1,6 @@
 import {APIKEY} from './environment.js';
+import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js"
+
 
 // Notes that I want to add for tonight and Friday
 
@@ -20,6 +22,7 @@ let searchTime = document.getElementById('searchTime');
 let weatherType = document.getElementById('weatherType');
 
 let searchInput = document.getElementById('searchInput');
+let addFavoriteBtn = document.getElementById('addFavoriteBtn')
 
 let dayTwoWeather = document.getElementById('dayTwoWeather');
 let dayThreeWeather = document.getElementById('dayThreeWeather');
@@ -33,8 +36,11 @@ let imageDayFour = document.getElementById('imageDayFour');
 let imageDayFive = document.getElementById('imageDayFive');
 let imageDayOne = document.getElementById('imageDayOne');
 
+let lat = "";
+let lon = "";
 
-
+let mainCardColor = document.getElementById('mainCardColor');
+let favoriteCardColor = document.getElementById('favoriteCardColor');
 
 
 
@@ -46,6 +52,20 @@ async function geoLocation(location) {
     return geoData
 }
 
+// When Start program/ Nav geo location will ateempt to grap location
+
+navigator.geolocation.getCurrentPosition(success);
+
+// If it gets location successfully, it runs function success which allows you to save your lat and lon values (These are global variables at the top of my page)
+async function success(position){
+    console.log(position)
+    lat = position.coords.latitude
+    lon = position.coords.longitude
+    // after i save lat and lon, I need to call the api call weather passing in my lat and lon, and use the data from that call to populate my UI
+    let dataWeather = await apiCallWeather(lat, lon);
+    const fiveDayWeatherData = await apiCallFiveDay(lat, lon);
+    searchFunction(fiveDayWeatherData, dataWeather);
+}
 
 
 // API 
@@ -75,6 +95,7 @@ ApiButton.addEventListener('click', function(event){
 function searchFunction(fiveDayWeatherData, dataWeather){
   console.log(fiveDayWeatherData, dataWeather);
   const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9/5 + 32).toFixed(0);
+  console.log
   let temp = kelvinToFahrenheit(dataWeather.main.temp);
   currentDayTemp.innerText = `${temp}°F`;
   let high = kelvinToFahrenheit(dataWeather.main.temp_max);
@@ -91,7 +112,6 @@ function searchFunction(fiveDayWeatherData, dataWeather){
 }
 
 
-// HTML and Local Storage Functions 
 searchInput.addEventListener('keydown', async function(event){
 
 if(event.key == 'Enter'){
@@ -107,6 +127,60 @@ if(event.key == 'Enter'){
 
 
 
+// Local Storage(Collabed with Bowen and Juan)
+
+
+
+
+const storedValue = document.getElementById('storedValue');
+
+
+addFavoriteBtn.addEventListener('click', () => {
+  let storageValue = searchInput.value
+  saveToLocalStorage(storageValue);
+  loadFavorites();
+})
+
+
+async function favoritesLoading(favoritesLocation) {
+  let geoData = await geoLocation(favoritesLocation);
+  let dataWeather = await apiCallWeather(geoData[0].lat, geoData[0].lon);
+  const fiveDayWeatherData = await apiCallFiveDay(geoData[0].lat, geoData[0].lon);
+  searchFunction(fiveDayWeatherData, dataWeather);
+}
+
+loadFavorites();
+
+
+async function loadFavorites() {
+  const storedFavorites = getFromLocalStorage();
+  
+  storedValue.innerHTML = ''; 
+  
+  storedFavorites.forEach(favorites => {
+    let pTag = document.createElement('p');
+    let removeButton = document.createElement('button');
+    removeButton.innerText = "X";
+    removeButton.className = "removeBtn";
+    
+    removeButton.addEventListener('click', () => {
+      removeFromLocalStorage(favorites); 
+      pTag.remove(); 
+    });
+    
+    pTag.innerText = favorites;
+    
+    pTag.addEventListener('click', function() {
+      favoritesLoading(favorites);  
+    });
+    
+    pTag.appendChild(removeButton);
+    storedValue.appendChild(pTag);  
+  });
+}
+
+
+
 // Date and Time ( Help from Tanush )
 function updateClock() {
     const now = new Date();
@@ -116,7 +190,7 @@ function updateClock() {
     let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, "0");
     const meridiem = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
+    let displayHours = hours % 12 || 12;
   
     const week = [
       "Sun",
@@ -125,23 +199,41 @@ function updateClock() {
       "Wed",
       "Thu",
       "Fri",
-      "Sat"
+      "Sat",
     ];
 
-    dayOneWeather.innerText = week[(today) % 6];
-    dayTwoWeather.innerText = week[(today + 1) % 6];
-    dayThreeWeather.innerText = week[(today + 2) % 6];
-    dayFourWeather.innerText = week[(today + 3) % 6];
-    dayFiveWeather.innerText = week[(today + 4) % 6];
+    dayOneWeather.innerText = week[(today) % 7];
+    dayTwoWeather.innerText = week[(today + 1) % 7];
+    dayThreeWeather.innerText = week[(today + 2) % 7];
+    dayFourWeather.innerText = week[(today + 3) % 7];
+    dayFiveWeather.innerText = week[(today + 4) % 7];
     
   
   
     if (minutes !== previousMinutes) {
-      searchDate.innerText = `${month} ${day}${suffix(day)}, `;
-      searchTime.innerText = `${hours}:${minutes}${meridiem}`;
+      searchDate.innerText = `${month} ${day}, `;
+      searchTime.innerText = `${displayHours}:${minutes}${meridiem}`;
   
       previousMinutes = minutes;
     }
-  }
+
+    const body = document.querySelector('body');
+    const isNightTime = hours >= 18 || hours < 6;
+    
+  
+    if (!isNightTime) {
+      body.className = "bg-day";
+      mainCardColor.className = "container forecast-card-day";
+      favoriteCardColor.className = "favorites-bg-day text-center";
+      addFavoriteBtn.className = "weather-text button-text-day"
+    } else if (isNightTime){
+      body.className = "bg-night";
+      mainCardColor.className = "container forecast-card-night white-text";
+      favoriteCardColor.className = "favorites-bg-night text-center white-text";
+      addFavoriteBtn.className = "weather-text button-text-night white-text"
+      
+    }
+   
+}
 
   setInterval(updateClock, 1000);
