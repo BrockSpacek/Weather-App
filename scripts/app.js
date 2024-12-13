@@ -2,6 +2,7 @@ import {APIKEY} from './environment.js';
 import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js"
 
 
+
 // Notes that I want to add for tonight and Friday
 
 // Make sure Data populates when page loads in for current location

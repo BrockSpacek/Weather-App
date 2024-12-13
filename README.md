@@ -7,4 +7,4 @@ Figma Link: https://www.figma.com/design/67J96QA4Gb7SCOD6rRo4es/KumarTP-WeatherS
 
 Peer Review: Juan Heredia
 
-Comments: 
+Comments: everything works fine, my only real nitpick is that theres a random button on the bottom left that says "api test" si you should probably remove that
