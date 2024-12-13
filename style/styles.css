@@ -163,7 +163,7 @@
 
 .removeBtn{
     border: 1px;
-    background-color: none;
+    background-color: var(--favorite-day);
     font-size: 30px;
     font-weight: 600;
     margin-left: 30px;
@@ -172,7 +172,7 @@
 
 .removeBtnNight{
     border: 1px;
-    background-color: none;
+    background-color: var(--favorite-night);
     font-size: 30px;
     font-weight: 600;
     margin-left: 30px;
