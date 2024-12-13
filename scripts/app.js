@@ -3,11 +3,6 @@ import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from ".
 
 
 
-// Notes that I want to add for tonight and Friday
-
-// Make sure Data populates when page loads in for current location
-// Finish up Local Storoage
-// Finish up Day Time, Night Time, and Cloudy/Rainy Modes
 
 
 // IDs
